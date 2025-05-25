@@ -1,8 +1,9 @@
-package com.inventario.inventario.modelo.compra;
+package com.inventario.empleado.modelo;
 
-import java.util.List;
-import com.inventario.inventario.modelo.Producto;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,5 @@ public class Proveedor {
     private String nombre;
 
 
-    @OneToMany(mappedBy = "proveedor")
-    private List<Producto> productos;
 
    }

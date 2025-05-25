@@ -1,8 +1,7 @@
-package com.inventario.inventario.controlador;
+package com.inventario.empleado.controlador.compra;
 
-
-import com.inventario.inventario.modelo.Proveedor;
-import com.inventario.inventario.servicio.ServicioProveedor;
+import com.inventario.empleado.modelo.Proveedor;
+import com.inventario.empleado.servicio.compra.ServicioProveedor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

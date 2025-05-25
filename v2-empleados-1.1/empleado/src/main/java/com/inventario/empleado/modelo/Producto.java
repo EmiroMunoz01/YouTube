@@ -1,4 +1,4 @@
-package com.inventario.inventario.modelo;
+package com.inventario.empleado.modelo;
 
 
 import jakarta.persistence.*;

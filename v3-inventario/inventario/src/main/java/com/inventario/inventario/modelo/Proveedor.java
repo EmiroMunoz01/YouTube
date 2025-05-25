@@ -1,6 +1,8 @@
 package com.inventario.inventario.modelo;
 
-import jakarta.persistence.Entity;
+
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +13,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemoriaRAM extends Producto{
+public class Proveedor {
 
-    private double velocidad;
-    @Override
-    public String getTipoProducto() {
-        return "memoria_ram";
-    }
-}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    private String nombre;
+
+
+
+   }

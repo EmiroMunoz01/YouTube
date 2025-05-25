@@ -22,7 +22,6 @@ public class EntidadIngeniero extends EntidadAbstractaEmpleado{
     private List<EntidadObrero> obreros = new ArrayList<>();
 
 
-
     @OneToOne(mappedBy = "ingeniero")
     private EntidadAbstractaObraConstruccion obra;
 

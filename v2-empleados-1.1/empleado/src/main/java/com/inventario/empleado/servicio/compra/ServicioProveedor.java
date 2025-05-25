@@ -1,7 +1,8 @@
-package com.inventario.inventario.servicio;
+package com.inventario.empleado.servicio.compra;
 
-import com.inventario.inventario.modelo.Proveedor;
-import com.inventario.inventario.repositorio.RepositorioProveedor;
+
+import com.inventario.empleado.modelo.Proveedor;
+import com.inventario.empleado.repositorio.RepositorioProveedor;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
