@@ -1,7 +1,8 @@
-package com.inventario.empleado.repositorio;
+package com.example.demo.repositorio;
 
 
-import com.inventario.empleado.modelo.compra.Proveedor;
+
+import com.example.demo.modelo.compra.Proveedor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

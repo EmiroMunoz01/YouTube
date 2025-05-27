@@ -1,4 +1,4 @@
-package com.inventario.empleado.modelo;
+package com.example.demo.modelo;
 
 import lombok.Getter;
 

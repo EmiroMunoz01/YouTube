@@ -1,7 +1,7 @@
-package com.inventario.empleado.controlador.compra;
+package com.example.demo.controlador;
 
-import com.inventario.empleado.modelo.Proveedor;
-import com.inventario.empleado.servicio.compra.ServicioProveedor;
+import com.example.demo.modelo.compra.Proveedor;
+import com.example.demo.servicio.ServicioProveedor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +28,8 @@ public class ControladorProveedor {
     //2. listar proveedor
     @GetMapping("/listar")
     public ResponseEntity <List<Proveedor>> listar(){
-        List<Proveedor> listarProveedores = servicioProveedor.listarProveedores();
-        return ResponseEntity.ok(listarProveedores);
+        List<Proveedor> listaProveedores = servicioProveedor.listarProveedores();
+        return ResponseEntity.ok(listaProveedores);
     }
 
     //3. listar proveedor por id

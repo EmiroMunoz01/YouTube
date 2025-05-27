@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!-- Esencial para habilitar los atributos de Thymeleaf -->
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Título por Defecto</title> <!-- Usa th:text para establecer el título dinámicamente -->
+    <!-- Puedes añadir CSS aquí, por ejemplo, Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${titulo}">Título de la Página</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Stock</th>
+            <th>Costo Unitario</th>
+            <th>Valor Total Stock</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterar sobre la lista de productos pasada desde el controlador -->
+        <tr th:each="Ingenieros : ${Ingenieros}"> <!-- th:each para bucles -->
+            <td th:text="${Ingenieros.id}">1</td>
+            <td th:text="${Ingenieros.nombre}">Nombre Producto</td>
+
+        </tr>
+        <!-- Mensaje si no hay productos -->
+        <tr th:if="${Ingenieros.isEmpty()}"> <!-- th:if para condicionales -->
+            <td colspan="7" class="text-center">No hay Ingenieros para mostrar.</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Ejemplo de un enlace para crear un nuevo producto (necesitarías un controlador para esto) -->
+    <!-- <a th:href="@{/ui/productos/nuevo}" class="btn btn-primary">Añadir Nuevo Producto</a> -->
+</div>
+
+<!-- Scripts de Bootstrap (opcional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

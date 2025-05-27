@@ -1,4 +1,4 @@
-package com.inventario.empleado.modelo;
+package com.inventario.empleado.modelo.compra;
 
 
 import jakarta.persistence.*;
@@ -25,7 +25,7 @@ public class Producto {
 
     private String nombre;
 
-    @Column(name = "")
+
     private String descripcion;
 
     @Column(name = "valor_unitario")

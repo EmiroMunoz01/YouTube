@@ -1,7 +1,8 @@
-package com.inventario.empleado.servicio.compra;
+package com.example.demo.servicio;
 
-import com.inventario.empleado.modelo.compra.Producto;
-import com.inventario.empleado.repositorio.RepositorioProducto;
+
+import com.example.demo.modelo.Producto;
+import com.example.demo.repositorio.RepositorioProducto;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +28,7 @@ public class ServicioProducto {
 
         buscarProducto.setNombre(producto.getNombre());
         buscarProducto.setDescripcion(producto.getDescripcion());
-        buscarProducto.setValor_unitario(producto.getValor_unitario());
-        buscarProducto.setCantidad(producto.getCantidad());
-        buscarProducto.setCantidad(producto.getCantidad());
-        buscarProducto.setCategoria(producto.getCategoria());
+
 
         return repositorioProducto.save(buscarProducto);
 

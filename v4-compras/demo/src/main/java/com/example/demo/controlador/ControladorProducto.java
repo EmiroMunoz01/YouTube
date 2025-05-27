@@ -1,9 +1,9 @@
-package com.inventario.empleado.controlador.compra;
+package com.example.demo.controlador;
 
 
 
-import com.inventario.empleado.modelo.Producto;
-import com.inventario.empleado.servicio.compra.ServicioProducto;
+import com.example.demo.modelo.Producto;
+import com.example.demo.servicio.ServicioProducto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/compudorado/producto")
+@RequestMapping("/empresa/producto")
 public class ControladorProducto {
 
     private final ServicioProducto servicioProducto;

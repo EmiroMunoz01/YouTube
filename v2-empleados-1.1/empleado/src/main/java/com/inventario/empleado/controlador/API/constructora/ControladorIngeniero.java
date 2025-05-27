@@ -1,9 +1,11 @@
-package com.inventario.empleado.controlador;
+package com.inventario.empleado.controlador.API.constructora;
 
 import com.inventario.empleado.modelo.EntidadIngeniero;
 import com.inventario.empleado.servicio.ServicioIngeniero;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +31,9 @@ public class ControladorIngeniero {
         List<EntidadIngeniero> Ingenieros = servicioIngeniero.listarIngenieros();
         return ResponseEntity.ok(Ingenieros);
     }
+
+
+
 
     @GetMapping("/listar-por-id/{id}")
     public ResponseEntity<EntidadIngeniero> buscarIngeniero(@PathVariable Long id) {

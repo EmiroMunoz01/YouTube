@@ -1,4 +1,4 @@
-package com.inventario.empleado.controlador;
+package com.inventario.empleado.controlador.API.constructora;
 
 import com.inventario.empleado.modelo.EntidadObrero;
 import com.inventario.empleado.servicio.ServicioObrero;
