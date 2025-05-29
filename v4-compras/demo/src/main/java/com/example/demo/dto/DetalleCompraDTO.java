@@ -6,9 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DetalleCompraRequestDTO  {
-    @NotBlank(message = "El nombre del producto no puede estar vacío")
-    private String nombreProducto;
+public class DetalleCompraDTO  {
+
+    private ProductoDTORequest productoInfo; // Información para crear/buscar el producto
 
     private Integer cantidad;
     private Double precioUnitarioCompra;

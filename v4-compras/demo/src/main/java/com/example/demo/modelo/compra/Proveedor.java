@@ -1,5 +1,7 @@
 package com.example.demo.modelo.compra;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +23,8 @@ public class Proveedor {
 
     private String nombre;
 
-    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "proveedor", fetch = FetchType.LAZY)
+    @JsonManagedReference("proveedor-compras")
     private List<Compra> compras;
 
    }

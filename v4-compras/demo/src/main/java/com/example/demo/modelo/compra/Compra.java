@@ -1,5 +1,7 @@
 package com.example.demo.modelo.compra;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,16 +26,15 @@ public class Compra {
     private LocalDateTime fechaCompra;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "proveedor_id", nullable = true)
+    @JoinColumn(name = "proveedor_id")
+    @JsonBackReference("proveedor-compras")
     private Proveedor proveedor;
 
     @Column(name = "total_compra")
     private Double totalCompra;
 
-    @Column(name = "fecha_registro_sistema", updatable = false)
-    private LocalDateTime fechaRegistroSistema;
-
     @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference("compra-detalles")
     private List<DetalleCompra> detalles = new ArrayList<>();
 
     @PrePersist

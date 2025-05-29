@@ -18,10 +18,10 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = false)
     private String nombre;
 
-    @Column(columnDefinition = "TEXT")
+
     private String descripcion;
 
     @Enumerated(EnumType.STRING)

@@ -1,6 +1,7 @@
 package com.example.demo.modelo.compra;
 
 import com.example.demo.modelo.Producto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,8 @@ public class DetalleCompra {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "compra_id", nullable = false)
+    @JsonBackReference("compra-detalles")
     private Compra compra;
 
     @ManyToOne(fetch = FetchType.LAZY) // No se necesita cascada aquí usualmente, el producto ya debe existir
@@ -32,6 +35,11 @@ public class DetalleCompra {
     @Column(name = "precio_unitario_compra", nullable = false)
     private Double precioUnitarioCompra;
 
-    @Formula("cantidad * precio_unitario_compra") // Campo calculado por la BD
-    private Double subtotal;
+    public Double getSubtotal() {
+        if (this.cantidad != null && this.precioUnitarioCompra != null) {
+            return this.cantidad * this.precioUnitarioCompra;
+        }
+
+        return 0.0;
+    }
 }
