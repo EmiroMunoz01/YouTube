@@ -33,20 +33,27 @@ public class Compra {
     @Column(name = "total_compra")
     private Double totalCompra;
 
-    @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL,
+            orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference("compra-detalles")
     private List<DetalleCompra> detalles = new ArrayList<>();
 
     @PrePersist
     @PreUpdate
     public void calcularTotalCompra() {
+
         if (this.detalles == null || this.detalles.isEmpty()) {
             this.totalCompra = 0.0;
         } else {
-            this.totalCompra = this.detalles.stream()
-                    .filter(d -> d.getSubtotal() != null)
-                    .mapToDouble(DetalleCompra::getSubtotal)
-                    .sum();
+
+            double sumaCalculada = 0.0;
+
+            for (DetalleCompra detalle : this.detalles) {
+                if (detalle != null && detalle.getSubtotal() != null) {
+                    sumaCalculada += detalle.getSubtotal();
+                }
+            }
+            this.totalCompra = sumaCalculada;
         }
     }
 }
