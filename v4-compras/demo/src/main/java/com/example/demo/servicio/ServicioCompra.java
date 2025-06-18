@@ -2,6 +2,8 @@ package com.example.demo.servicio;
 
 import com.example.demo.dto.CompraDTO;
 import com.example.demo.dto.DetalleCompraDTO;
+import com.example.demo.dto.ProductoDTORequest;
+import com.example.demo.dto.ProveedorDTO;
 import com.example.demo.modelo.Producto;
 import com.example.demo.modelo.compra.Compra;
 import com.example.demo.modelo.compra.DetalleCompra;
@@ -31,6 +33,7 @@ public class ServicioCompra {
     }
 
     public Compra crearCompra(CompraDTO compraDTO) {
+
         Compra compra = new Compra();
 
         compra.setFechaCompra(LocalDateTime.now());
@@ -40,7 +43,6 @@ public class ServicioCompra {
         Proveedor proveedor = repositorioProveedor.findById(compraDTO.getProveedorId())
                 .orElseThrow(() -> new RuntimeException("Proveedor no encontrado con ID: "
                         + compraDTO.getProveedorId()));
-
 
         compra.setProveedor(proveedor);
 
@@ -74,12 +76,58 @@ public class ServicioCompra {
         return repositorioCompra.save(compra);
     }
 
-
     public Optional<Compra> obtenerCompraPorId(Long id) {
         return repositorioCompra.findById(id);
     }
 
-    public List<Compra> obtenerTodasLasCompras() {
-        return repositorioCompra.findAll();
+    public List<CompraDTO> obtenerTodasLasCompras() {
+
+
+        List<Compra> compras = repositorioCompra.findAll();
+        List<CompraDTO> comprasDTO = new ArrayList<>();
+
+        // Iterar sobre cada compra generada por el repositorio
+        for (Compra compra : compras) {
+
+            // Arreglo para almacenar los detalleCompraDTO
+            List<DetalleCompraDTO> detallesDTO = new ArrayList<>();
+
+            for (DetalleCompra detalle : compra.getDetalles()) {
+
+                Producto producto = detalle.getProducto();
+
+                // Convertir Producto a ProductoDTORequest
+                ProductoDTORequest productoDTORequest = new ProductoDTORequest(
+
+                        producto.getNombre(),
+                        producto.getDescripcion(),
+                        producto.getCategoria()
+                        // Agregar todos los campos que necesite ProductoDTORequest
+                );
+
+                // Crear el DetalleCompraDTO con el DTO del producto
+                detallesDTO.add(new DetalleCompraDTO(
+                        productoDTORequest,
+                        detalle.getCantidad(),
+                        detalle.getPrecioUnitarioCompra()
+                ));
+                // Crear CompraDTO con los datos correctos
+                comprasDTO.add(new CompraDTO(compra.getFechaCompra(), compra.getProveedor().getId(),
+                        detallesDTO));
+            }
+
+        }
+
+
+        return comprasDTO;
+
+
     }
+
+
+
+
+
+
+
 }

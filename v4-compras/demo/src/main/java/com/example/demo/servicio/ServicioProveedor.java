@@ -1,10 +1,18 @@
 package com.example.demo.servicio;
 
+import com.example.demo.dto.CompraDTO;
+import com.example.demo.dto.DetalleCompraDTO;
+import com.example.demo.dto.ProductoDTORequest;
+import com.example.demo.dto.ProveedorDTO;
+import com.example.demo.modelo.Producto;
+import com.example.demo.modelo.compra.Compra;
+import com.example.demo.modelo.compra.DetalleCompra;
 import com.example.demo.modelo.compra.Proveedor;
 import com.example.demo.repositorio.RepositorioProveedor;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,10 +43,56 @@ public class ServicioProveedor {
     }
 
     //3. Listar proveedor
-    public List<Proveedor> listarProveedores() {
-        return repositorioProveedor.findAll();
-    }
+    public List<ProveedorDTO> listarProveedores() {
 
+        List<Proveedor> listaProveedores = repositorioProveedor.findAll();
+        List<ProveedorDTO> listaProveedorDTO = new ArrayList<>();
+
+        // Iterar sobre cada proveedor generado por el repositorio
+        for (Proveedor proveedor : listaProveedores) {
+
+            // Arreglo para almacenar las comprasDTO
+            List<CompraDTO> comprasDTO = new ArrayList<>();
+
+            // Iterar cada compra del proveedor para convertirla en CompraDTO
+            for (Compra compra : proveedor.getCompras()) {
+
+                // Convertir DetalleCompra a DetalleCompraDTO
+                List<DetalleCompraDTO> detallesDTO = new ArrayList<>();
+
+
+                for (DetalleCompra detalle : compra.getDetalles()) {
+
+                    Producto producto = detalle.getProducto();
+
+                    // Convertir Producto a ProductoDTORequest
+                    ProductoDTORequest productoDTORequest = new ProductoDTORequest(
+
+                            producto.getNombre(),
+                            producto.getDescripcion(),
+                            producto.getCategoria()
+                            // Agregar todos los campos que necesite ProductoDTORequest
+                    );
+
+                    // Crear el DetalleCompraDTO con el DTO del producto
+                    detallesDTO.add(new DetalleCompraDTO(
+                            productoDTORequest,
+                            detalle.getCantidad(),
+                            detalle.getPrecioUnitarioCompra()
+                    ));
+                }
+
+
+                // Crear CompraDTO con los datos correctos
+                comprasDTO.add(new CompraDTO(compra.getFechaCompra(), compra.getProveedor().getId(), // Obtener ID del proveedor desde la relación
+                        detallesDTO));
+            }
+
+            listaProveedorDTO.add(new ProveedorDTO(proveedor.getNombre(), comprasDTO));
+        }
+
+        return listaProveedorDTO;
+    }
 
     //4. Eliminar proveedor
     public String eliminarProveedor(Long id) {
@@ -52,7 +106,7 @@ public class ServicioProveedor {
 
     //5. Listar por ID
 
-    public Proveedor buscarProveedorPorId(Long id){
+    public Proveedor buscarProveedorPorId(Long id) {
 
         return repositorioProveedor.findById(id).orElseThrow(() -> new EntityNotFoundException("Entidad no encontrada"));
 

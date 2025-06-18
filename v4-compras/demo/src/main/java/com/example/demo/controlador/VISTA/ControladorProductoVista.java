@@ -1,4 +1,4 @@
-package com.example.demo.controlador;
+package com.example.demo.controlador.VISTA;
 
 
 
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/empresa/producto")
-public class ControladorProducto {
+@RequestMapping("/compudorado/producto")
+public class ControladorProductoVista {
 
     private final ServicioProducto servicioProducto;
 
-    public ControladorProducto(ServicioProducto servicioProducto) {
+    public ControladorProductoVista(ServicioProducto servicioProducto) {
         this.servicioProducto = servicioProducto;
     }
 

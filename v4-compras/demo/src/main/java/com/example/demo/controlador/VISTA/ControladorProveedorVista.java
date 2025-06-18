@@ -1,5 +1,6 @@
-package com.example.demo.controlador;
+package com.example.demo.controlador.VISTA;
 
+import com.example.demo.dto.ProveedorDTO;
 import com.example.demo.modelo.compra.Proveedor;
 import com.example.demo.servicio.ServicioProveedor;
 import org.springframework.http.HttpStatus;
@@ -10,11 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/compudorado/proveedor")
-public class ControladorProveedor {
+public class ControladorProveedorVista {
 
     private final ServicioProveedor servicioProveedor;
 
-    public ControladorProveedor(ServicioProveedor servicioProveedor) {
+    public ControladorProveedorVista(ServicioProveedor servicioProveedor) {
         this.servicioProveedor = servicioProveedor;
     }
 
@@ -27,8 +28,8 @@ public class ControladorProveedor {
 
     //2. listar proveedor
     @GetMapping("/listar")
-    public ResponseEntity <List<Proveedor>> listar(){
-        List<Proveedor> listaProveedores = servicioProveedor.listarProveedores();
+    public ResponseEntity <List<ProveedorDTO>> listar(){
+        List<ProveedorDTO> listaProveedores = servicioProveedor.listarProveedores();
         return ResponseEntity.ok(listaProveedores);
     }
 
