@@ -5,12 +5,13 @@ import com.example.demo.modelo.compra.Proveedor;
 import com.example.demo.servicio.ServicioProveedor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/compudorado/proveedor")
+@Controller
+@RequestMapping("compudorado/compra/ui")
 public class ControladorProveedorVista {
 
     private final ServicioProveedor servicioProveedor;
