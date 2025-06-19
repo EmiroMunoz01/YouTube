@@ -20,11 +20,7 @@ public class ControladorProveedor {
     }
 
     //1. crear proveedor
-    @PostMapping("/crear")
-    public ResponseEntity<Proveedor> crear(@RequestBody Proveedor proveedor) {
-        Proveedor nuevoProveedor = servicioProveedor.crearProveedor(proveedor);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoProveedor);
-    }
+
 
     //2. listar proveedor
     @GetMapping("/listar")

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("compudorado/compra/ui")
+@RequestMapping("compudorado/producto/ui")
 public class ControladorProductoVista {
 
     private final ServicioProducto servicioProducto;

@@ -1,17 +1,19 @@
 package com.example.demo.controlador.VISTA;
 
+
+import com.example.demo.dto.ProveedorCrearDTO;
 import com.example.demo.dto.ProveedorDTO;
 import com.example.demo.modelo.compra.Proveedor;
 import com.example.demo.servicio.ServicioProveedor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("compudorado/compra/ui")
+@RequestMapping("compudorado/ui")
 public class ControladorProveedorVista {
 
     private final ServicioProveedor servicioProveedor;
@@ -21,18 +23,43 @@ public class ControladorProveedorVista {
     }
 
     //1. crear proveedor
-    @PostMapping("/crear")
-    public ResponseEntity<Proveedor> crear(@RequestBody Proveedor proveedor) {
-        Proveedor nuevoProveedor = servicioProveedor.crearProveedor(proveedor);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoProveedor);
+    @PostMapping("/proveedor/crear")
+    public String crearProveedor(@ModelAttribute("proveedor") ProveedorCrearDTO proveedorDTO) {
+        Proveedor proveedor = convertirDTOaEntidad(proveedorDTO);
+        servicioProveedor.crearProveedor(proveedor);
+        return "redirect:/compudorado/ui/proveedor/listar";
+    }
+
+
+    public Proveedor convertirDTOaEntidad(ProveedorCrearDTO dto) {
+        Proveedor proveedor = new Proveedor();
+        proveedor.setNombre(dto.getNombre());
+
+        return proveedor;
+    }
+
+    @GetMapping("/proveedor/crear")
+    public String mostrarFormulario(Model model) {
+        model.addAttribute("proveedor", new ProveedorDTO());
+        return "proveedor/crear";
     }
 
     //2. listar proveedor
-    @GetMapping("/listar")
-    public ResponseEntity <List<ProveedorDTO>> listar(){
+    @GetMapping("/proveedor/listar")
+    public String listar(Model model){
         List<ProveedorDTO> listaProveedores = servicioProveedor.listarProveedores();
-        return ResponseEntity.ok(listaProveedores);
+        model.addAttribute("proveedores", listaProveedores);
+        return "proveedor/listar";
     }
+
+
+
+
+
+
+
+
+
 
     //3. listar proveedor por id
     @GetMapping("/listar-por-id/{id}")

@@ -1,9 +1,6 @@
 package com.example.demo.servicio;
 
-import com.example.demo.dto.CompraDTO;
-import com.example.demo.dto.DetalleCompraDTO;
-import com.example.demo.dto.ProductoDTORequest;
-import com.example.demo.dto.ProveedorDTO;
+import com.example.demo.dto.*;
 import com.example.demo.modelo.Producto;
 import com.example.demo.modelo.compra.Compra;
 import com.example.demo.modelo.compra.DetalleCompra;
@@ -26,9 +23,18 @@ public class ServicioProveedor {
 
 
     //1. Crear proveedor
-    public Proveedor crearProveedor(Proveedor proveedor) {
-        return repositorioProveedor.save(proveedor);
+    public ProveedorCrearDTO crearProveedor(Proveedor proveedor) {
+
+         repositorioProveedor.save(proveedor);
+
+         ProveedorCrearDTO proveedorCrearDTO = new ProveedorCrearDTO();
+         proveedorCrearDTO.setNombre(proveedor.getNombre());
+
+        return proveedorCrearDTO;
+
     }
+
+
 
     //2. Modificar proveedor
     public Proveedor modificarProveedor(Long id, Proveedor proveedor) {
