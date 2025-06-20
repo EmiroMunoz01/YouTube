@@ -25,15 +25,14 @@ public class ServicioProveedor {
     //1. Crear proveedor
     public ProveedorCrearDTO crearProveedor(Proveedor proveedor) {
 
-         repositorioProveedor.save(proveedor);
+        repositorioProveedor.save(proveedor);
 
-         ProveedorCrearDTO proveedorCrearDTO = new ProveedorCrearDTO();
-         proveedorCrearDTO.setNombre(proveedor.getNombre());
+        ProveedorCrearDTO proveedorCrearDTO = new ProveedorCrearDTO();
+        proveedorCrearDTO.setNombre(proveedor.getNombre());
 
         return proveedorCrearDTO;
 
     }
-
 
 
     //2. Modificar proveedor

@@ -15,17 +15,15 @@ public class ControladorCompra {
 
     private final ServicioCompra compraService;
 
-
     public ControladorCompra(ServicioCompra compraService) {
         this.compraService = compraService;
     }
-
 
     @PostMapping("/crear")
     public ResponseEntity<Compra> crearCompra(@Valid @RequestBody CompraDTO compraDTO) {
 
         Compra nuevaCompra = compraService.crearCompra(compraDTO);
-        return ResponseEntity.ok(nuevaCompra); // ¡Mucho más limpio aquí!
+        return ResponseEntity.ok(nuevaCompra);
     }
 
     @GetMapping("/{id}")

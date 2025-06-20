@@ -38,7 +38,7 @@ public class ServicioCompra {
 
         compra.setFechaCompra(LocalDateTime.now());
 
-        // Aquí es donde buscas y asignas el proveedor
+        // Aquí es donde buscamos y asignamos el proveedor
         // La validación @NotNull del DTO ya hizo que proveedorId no sea null.
         Proveedor proveedor = repositorioProveedor.findById(compraDTO.getProveedorId())
                 .orElseThrow(() -> new RuntimeException("Proveedor no encontrado con ID: "

@@ -27,4 +27,5 @@ public class Proveedor {
     @JsonManagedReference("proveedor-compras")
     private List<Compra> compras;
 
-   }
+}
+
